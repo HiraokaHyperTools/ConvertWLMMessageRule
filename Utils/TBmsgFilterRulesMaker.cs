@@ -49,6 +49,8 @@ namespace ConvertWLMMessageRule.Utils
                 var criteria = rule.CriteriaList[0];
                 switch (criteria.Type)
                 {
+                    case TargetType.From:
+                        return BuildTBStringCondition("from", criteria.Verifier as StringVerifier);
                     case TargetType.To:
                         return BuildTBStringCondition("to", criteria.Verifier as StringVerifier);
                     case TargetType.Cc:

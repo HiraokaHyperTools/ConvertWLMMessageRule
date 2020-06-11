@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.reloadBtn = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openBtn = new System.Windows.Forms.ToolStripDropDownButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,20 @@
             this.reloadBtn.Text = "&Reload MessageRule";
             this.reloadBtn.Click += new System.EventHandler(this.reloadBtn_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // openBtn
+            // 
+            this.openBtn.Image = ((System.Drawing.Image)(resources.GetObject("openBtn.Image")));
+            this.openBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(203, 22);
+            this.openBtn.Text = "Try to open msgFilterRules.dat...";
+            this.openBtn.DropDownOpening += new System.EventHandler(this.openBtn_DropDownOpening);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -79,20 +93,6 @@
             this.textBox1.Size = new System.Drawing.Size(621, 417);
             this.textBox1.TabIndex = 2;
             this.textBox1.WordWrap = false;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // openBtn
-            // 
-            this.openBtn.Image = ((System.Drawing.Image)(resources.GetObject("openBtn.Image")));
-            this.openBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(203, 22);
-            this.openBtn.Text = "Try to open msgFilterRules.dat...";
-            this.openBtn.DropDownOpening += new System.EventHandler(this.openBtn_DropDownOpening);
             // 
             // Form1
             // 
