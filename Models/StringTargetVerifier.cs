@@ -6,8 +6,8 @@ using System.Text;
 
 namespace ConvertWLMMessageRule.Models
 {
-    public class AccountVerifier : IVerifier
+    public class StringTargetVerifier : IVerifier
     {
-        public string Account { get; set; }
+        public string Target { get; set; }
     }
 }

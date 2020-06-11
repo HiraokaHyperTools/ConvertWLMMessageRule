@@ -29,5 +29,5 @@
 ## ValueType
 
 - 19 = DWORD
-- 31 = UnicodeString (account id?)
+- 31 = UnicodeString (generic text)
 - 65 = UnicodeString

@@ -57,13 +57,13 @@ namespace ConvertWLMMessageRule.Utils
                                                     var criteria = new WLMCriteria
                                                     {
                                                         ThisAndNext = 0 != (2 & Logic),
-                                                        Type = (TargetType)Type,
+                                                        Type = (CriteriaType)Type,
                                                     };
                                                     rule.CriteriaList.Add(criteria);
 
                                                     var Flags = criteriaOrderKey.GetIntValue("Flags") ?? 0;
                                                     var ValueType = criteriaOrderKey.GetIntValue("ValueType") ?? 0;
-                                                    var StringValue = criteriaOrderKey.GetByteaUnicodeStringValue("Value") ?? "";
+                                                    var StringValue = criteriaOrderKey.GetByteaUnicodeStringValue("Value") ?? criteriaOrderKey.GetStringValue("Value") ?? "";
                                                     var IntValue = criteriaOrderKey.GetIntValue("Value") ?? 0;
 
                                                     switch (ValueType)
@@ -78,9 +78,9 @@ namespace ConvertWLMMessageRule.Utils
                                                             }
                                                         case 31:
                                                             {
-                                                                criteria.Verifier = new AccountVerifier
+                                                                criteria.Verifier = new StringTargetVerifier
                                                                 {
-                                                                    Account = StringValue,
+                                                                    Target = StringValue,
                                                                 };
                                                                 break;
                                                             }
@@ -91,6 +91,45 @@ namespace ConvertWLMMessageRule.Utils
                                                                     AndValues = 0 != (2 & Flags),
                                                                     NotContain = 0 != (1 & Flags),
                                                                     Keywords = StringValue.Split(new char[] { '\0' }, StringSplitOptions.RemoveEmptyEntries),
+                                                                };
+                                                                break;
+                                                            }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                using (var actionsKey = orderKey.OpenSubKey("Actions", false))
+                                {
+                                    if (actionsKey != null)
+                                    {
+                                        var actionsOrderValue = "" + actionsKey.GetValue("Order");
+                                        foreach (var actionsOrder in spaceSplitter.Split(actionsOrderValue))
+                                        {
+                                            using (var actionsOrderKey = actionsKey.OpenSubKey(actionsOrder, false))
+                                            {
+                                                if (actionsOrderKey != null)
+                                                {
+                                                    var Type = actionsOrderKey.GetIntValue("Type") ?? 0;
+
+                                                    var action = new WLMAction
+                                                    {
+                                                        Type = (ActionType)Type,
+                                                    };
+                                                    rule.ActionsList.Add(action);
+
+                                                    var ValueType = actionsOrderKey.GetIntValue("ValueType") ?? 0;
+                                                    var StringValue = actionsOrderKey.GetByteaUnicodeStringValue("Value") ?? actionsOrderKey.GetStringValue("Value") ?? "";
+
+                                                    switch (ValueType)
+                                                    {
+                                                        case 31:
+                                                            {
+                                                                action.Verifier = new StringTargetVerifier
+                                                                {
+                                                                    Target = StringValue,
                                                                 };
                                                                 break;
                                                             }

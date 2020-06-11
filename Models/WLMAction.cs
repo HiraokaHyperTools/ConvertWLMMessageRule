@@ -7,10 +7,9 @@ using System.Text;
 
 namespace ConvertWLMMessageRule.Models
 {
-    public class WLMCriteria
+    public class WLMAction
     {
-        public CriteriaType Type { get; set; }
+        public ActionType Type { get; set; }
         public IVerifier Verifier { get; set; }
-        public bool ThisAndNext { get; set; }
     }
 }

@@ -13,5 +13,6 @@ namespace ConvertWLMMessageRule.Models
         public bool Enabled { get; set; }
 
         public List<WLMCriteria> CriteriaList { get; set; } = new List<WLMCriteria>();
+        public List<WLMAction> ActionsList { get; set; } = new List<WLMAction>();
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConvertWLMMessageRule.Enums
 {
-    public enum TargetType
+    public enum CriteriaType
     {
         Subject = 8,
         Body = 9,

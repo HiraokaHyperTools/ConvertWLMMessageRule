@@ -27,5 +27,15 @@ namespace ConvertWLMMessageRule.Extensions
             }
             return null;
         }
+
+        public static string GetStringValue(this RegistryKey key, string name)
+        {
+            var value = key.GetValue(name);
+            if (value is string)
+            {
+                return (string)value;
+            }
+            return null;
+        }
     }
 }
