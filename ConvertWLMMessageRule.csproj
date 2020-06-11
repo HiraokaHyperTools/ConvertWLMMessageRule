@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>packages\Jint.2.11.58\lib\net40\Jint.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,12 +57,14 @@
     </Compile>
     <Compile Include="Interfaces\IVerifier.cs" />
     <Compile Include="Models\AccountVerifier.cs" />
+    <Compile Include="Models\MsgFilterRulesDat.cs" />
     <Compile Include="Models\WLMCriteria.cs" />
     <Compile Include="Models\WLMMailRule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\IntVerifier.cs" />
     <Compile Include="Models\StringVerifier.cs" />
+    <Compile Include="Utils\MsgFilterRulesUtil.cs" />
     <Compile Include="Utils\TBmsgFilterRulesMaker.cs" />
     <Compile Include="Utils\WLMMailRulesReader.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -74,6 +79,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

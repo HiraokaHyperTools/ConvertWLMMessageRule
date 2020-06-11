@@ -2,6 +2,7 @@
 using ConvertWLMMessageRule.Extensions;
 using ConvertWLMMessageRule.Models;
 using ConvertWLMMessageRule.Utils;
+using Jint;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -44,42 +45,23 @@ namespace ConvertWLMMessageRule
             Reload();
         }
 
-        IEnumerable<string> GetAllMsgFilterRules()
-        {
-            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var profiles = Path.Combine(appData, "Thunderbird", "Profiles");
-            foreach (var profileDir in Directory.GetDirectories(profiles))
-            {
-                var mailDir = Path.Combine(profileDir, "Mail");
-                if (Directory.Exists(mailDir))
-                {
-                    foreach (var accountDir in Directory.GetDirectories(mailDir))
-                    {
-                        var msgFilterRules = Path.Combine(accountDir, "msgFilterRules.dat");
-                        if (File.Exists(msgFilterRules))
-                        {
-                            yield return msgFilterRules;
-                        }
-                    }
-                }
-            }
-        }
 
         private void openBtn_DropDownOpening(object sender, EventArgs e)
         {
             openBtn.DropDownItems.Clear();
 
             //C:\Users\USER\AppData\Roaming\Thunderbird\Profiles\3cm5xixi.default\Mail\f\msgFilterRules.dat
-            foreach (var file in GetAllMsgFilterRules())
+            foreach (var pair in MsgFilterRulesUtil.GetAll())
             {
-                openBtn.DropDownItems.Add(file, null, OpenIt);
+                var tsi = openBtn.DropDownItems.Add($"{pair.FilePath} ({pair.AccountName})", null, OpenIt);
+                tsi.Name = pair.FilePath;
             }
         }
 
         private void OpenIt(object sender, EventArgs e)
         {
             var menu = (ToolStripMenuItem)sender;
-            Process.Start("notepad.exe", "\"" + menu.Text + "\"");
+            Process.Start("notepad.exe", "\"" + menu.Name + "\"");
         }
     }
 }
