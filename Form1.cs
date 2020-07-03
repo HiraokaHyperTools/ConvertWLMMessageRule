@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -20,6 +21,8 @@ namespace ConvertWLMMessageRule
 {
     public partial class Form1 : Form
     {
+        private WLMMailRulesReader sourceRules;
+
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +36,8 @@ namespace ConvertWLMMessageRule
         void Reload()
         {
             var reader = new WLMMailRulesReader();
+
+            this.sourceRules = reader;
 
             var maker = new TBmsgFilterRulesMaker(reader);
 
@@ -62,6 +67,61 @@ namespace ConvertWLMMessageRule
         {
             var menu = (ToolStripMenuItem)sender;
             Process.Start("notepad.exe", "\"" + menu.Name + "\"");
+        }
+
+        private void debugMenu_Click(object sender, EventArgs e)
+        {
+            var form = new Form();
+            TreeView tree = new TreeView();
+            Walk(tree.Nodes, sourceRules);
+            tree.Dock = DockStyle.Fill;
+            tree.ExpandAll();
+            form.Text = "sourceRules";
+            form.Controls.Add(tree);
+            form.Show(this);
+        }
+
+        private void Walk(TreeNodeCollection nodes, object source)
+        {
+            if (source == null)
+            {
+                return;
+            }
+
+            if (source is System.Collections.ICollection)
+            {
+                foreach (var one in (System.Collections.ICollection)source)
+                {
+                    Walk(nodes, one);
+                }
+                return;
+            }
+            var type = source.GetType();
+            foreach (var prop in type.GetProperties())
+            {
+                if (false
+                    || prop.PropertyType == typeof(string)
+                    || typeof(ValueType).IsAssignableFrom(prop.PropertyType)
+                )
+                {
+                    var subNode = nodes.Add(prop.Name + " = " + prop.GetValue(source, null));
+                    continue;
+                }
+                {
+                    var subNode = nodes.Add(prop.Name);
+                    try
+                    {
+                        //public class List<T> : IList<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable
+                        //public sealed class String : IComparable, ICloneable, IConvertible, IComparable<String>, IEnumerable<char>, IEnumerable, IEquatable<String>
+                        var subAny = prop.GetValue(source, null);
+                        Walk(subNode.Nodes, subAny);
+                    }
+                    catch (TargetParameterCountException)
+                    {
+                        // ignore
+                    }
+                }
+            }
         }
     }
 }

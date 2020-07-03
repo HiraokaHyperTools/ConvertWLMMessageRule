@@ -32,7 +32,11 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.reloadBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.debugMenu = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.openBtn = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
@@ -43,10 +47,14 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reloadBtn,
             this.toolStripSeparator1,
-            this.openBtn});
+            this.debugMenu,
+            this.toolStripSeparator3,
+            this.openBtn,
+            this.toolStripSeparator2,
+            this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(621, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(755, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -64,6 +72,20 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // debugMenu
+            // 
+            this.debugMenu.Image = ((System.Drawing.Image)(resources.GetObject("debugMenu.Image")));
+            this.debugMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.debugMenu.Name = "debugMenu";
+            this.debugMenu.Size = new System.Drawing.Size(90, 22);
+            this.debugMenu.Text = "sourceRules";
+            this.debugMenu.Click += new System.EventHandler(this.debugMenu_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // openBtn
             // 
             this.openBtn.Image = ((System.Drawing.Image)(resources.GetObject("openBtn.Image")));
@@ -72,6 +94,17 @@
             this.openBtn.Size = new System.Drawing.Size(203, 22);
             this.openBtn.Text = "Try to open msgFilterRules.dat...";
             this.openBtn.DropDownOpening += new System.EventHandler(this.openBtn_DropDownOpening);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(209, 22);
+            this.toolStripLabel1.Text = "※ Make sure notepad save as \"UTF-8\"!";
             // 
             // label1
             // 
@@ -90,14 +123,14 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(621, 417);
+            this.textBox1.Size = new System.Drawing.Size(755, 444);
             this.textBox1.TabIndex = 2;
             this.textBox1.WordWrap = false;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(621, 454);
+            this.ClientSize = new System.Drawing.Size(755, 481);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
@@ -120,6 +153,10 @@
         private System.Windows.Forms.ToolStripButton reloadBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripDropDownButton openBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton debugMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 
